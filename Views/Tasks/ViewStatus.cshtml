@@ -1,0 +1,39 @@
+﻿@model TaskStatusModel
+@{
+    ViewData["Title"] = "View Task Status";
+}
+
+<div>
+    <a class="btn task-homebtn" asp-controller="Tasks" asp-action="Index">All Tasks</a>
+</div>
+<div class="task-status-container">
+
+    <div style="width:50%">
+        <span class="task-status-span">Completed</span>
+        <div class="task-status-div">
+            <ul class="task-status-ul">
+                @for (int i = 0; i < Model.Completed.Count; i++)
+                {
+                    <li>@Model.Completed[i].Title</li>
+                }
+            </ul>
+        </div>
+
+    </div>
+
+    <div style="width:50%">
+        <span class="task-status-span">Pending</span>
+        <div class="task-status-div">
+            <ul class="task-status-ul">
+                @for (int i = 0; i < Model.Pending.Count; i++)
+                {
+                    <li>@Model.Pending[i].Title</li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    
+
+</div>
+

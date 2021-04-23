@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div style="height: 400px; width: 100%; background: url(/Content/images/task.jpg); background-repeat: no-repeat; background-size: cover;">
+
+</div>
+
+@if (ViewBag.Show)
+{
+<div style="display: flex; justify-content: center;">
+    <a class="btn task-homebtn" asp-controller="Tasks" asp-action="Create">Create Task</a>
+    <a class="btn task-homebtn" asp-controller="Tasks" asp-action="ViewStatus">View Status</a>
+</div>
+}

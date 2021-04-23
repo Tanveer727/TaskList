@@ -1,0 +1,81 @@
+﻿@model IEnumerable<TaskList.Models.Tasks>
+
+@{
+    ViewData["Title"] = "My Tasks";
+}
+
+<h4>My Tasks</h4>
+
+<p>
+    <a  class="btn task-homebtn" asp-action="Create">Create New</a>
+</p>
+<table class="table task-all">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DueDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoneDate)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DueDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoneDate)
+                </td>
+
+                <td>
+                    <input class="btn task-homebtn1" type="button" value="Copy"  onclick="CopyTitle('@item.Title')">
+                    @if (!item.Done)
+                    {
+                        <a class="btn task-homebtn1"asp-action="Edit" asp-route-id="@item.Id">Complete It</a>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts
+{
+    <script type="text/javascript">
+        function CopyTitle(evt) {
+                navigator.permissions.query({ name: "clipboard-write", allowWithoutGesture: false}).then(result => {
+                    // If permission to read the clipboard is granted or if the user will
+                    // be prompted to allow it, we proceed.
+                    if (confirm("Do you want to Copy It")) {
+                        if (result.state == "granted" || result.state == "prompt") {
+                            navigator.clipboard.writeText(evt);
+                        }
+                    }
+                });
+        }
+    </script>
+}
